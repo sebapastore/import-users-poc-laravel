@@ -7,18 +7,20 @@ Small API that accepts a CSV upload of Users, processes it asynchronously via a 
 * Laravel 12 (Laravel doesn't have proper LTS, the idea is be up to date always if possible)
 * PHP 8.4 (Laravel 12 allows PHP version between 8.2 - 8.4)
 
-## Setup
+## Local Setup
 
 ### Requirements
 PHP 8.4, Composer 2, common php extensions.
 
 ### Installation
+
+
 1. Install dependencies:
    ```bash
    composer install
    ```
 
-2. Copy the example environment file:
+2. Copy the example environment file. This will set a default `API_TOKEN=123456` that can be updated:
    ```bash
    cp .env.example .env
    ```
