@@ -30,7 +30,7 @@ PHP 8.4, Composer 2, common php extensions.
    php artisan key:generate
    ```
    
-4. Run the migrations::
+4. Run the migrations:
    ```bash
    php artisan migrate
    ```

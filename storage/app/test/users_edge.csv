@@ -1,0 +1,3 @@
+name,email,role,salary,start_date,notes
+A,A@example.com,staff,0,2024-12-31,ok
+B,B@example.com,staff,0,,optional date missing

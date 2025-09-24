@@ -1,0 +1,10 @@
+name,email,role,salary,start_date
+  Alice Johnson  , alice@example.com ,admin,95000,2024-01-15
+Bob Smith,bob@example.com,manager,-10,2023-07-01
+Cara Lee,cara@example.com,staff,52000,2025-03-10
+Duplicate Bob,bob@example.com,staff,60000,2024-05-01
+No Role,norole@example.com,,50000,2024-02-02
+Bad Role,badrole@example.com,superuser,70000,2024-02-02
+Bad Date,baddate@example.com,staff,70000,02/31/2024
+Empty Salary,emptysalary@example.com,staff,,2024-04-01
+Whitespace Only,space@example.com,staff, ,

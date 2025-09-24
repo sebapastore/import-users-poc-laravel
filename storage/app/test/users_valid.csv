@@ -1,0 +1,4 @@
+name,email,role,salary,start_date
+Alice Johnson,alice@example.com,admin,95000,2024-01-15
+Bob Smith,bob@example.com,manager,80000,2023-07-01
+Cara Lee,cara@example.com,staff,52000,2025-03-10
