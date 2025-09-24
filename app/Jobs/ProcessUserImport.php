@@ -45,7 +45,7 @@ class ProcessUserImport implements ShouldQueue
     /**
      * @throws Throwable
      */
-    public function failed(\Throwable $th)
+    public function failed(Throwable $th)
     {
         $import = Import::query()->findOrFail($this->importId);
 

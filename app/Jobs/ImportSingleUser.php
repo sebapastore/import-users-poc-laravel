@@ -9,8 +9,10 @@ use Illuminate\Bus\Batchable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Throwable;
 
 class ImportSingleUser implements ShouldQueue
 {
@@ -77,6 +79,20 @@ class ImportSingleUser implements ShouldQueue
             'salary' => isset($this->rowData[3]) ? round((float) trim($this->rowData[3]), 2) : 0.00,
             'start_date' => isset($this->rowData[4]) ? trim($this->rowData[4]) : null,
         ];
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function failed(Throwable $th): void
+    {
+        $import = Import::query()->findOrFail($this->importId);
+
+        $import?->recordFailedRow('Un unexpected error occurred.', $this->rowIndex);
+
+        Log::error("Error while processing the row '{$this->rowIndex}' from import '{$this->importId}'");
+
+        throw $th;
     }
 
 }
