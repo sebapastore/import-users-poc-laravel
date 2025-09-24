@@ -38,4 +38,20 @@ class Import extends Model
             'finished_at' => 'datetime',
         ];
     }
+
+    public static function newPendingImport(string $filePath): self
+    {
+        $import = new self;
+        $import->status = ImportStatus::Pending;
+        $import->file_path = $filePath;
+        $import->total_rows = null; // Total rows is null (unknown) before start processing
+        $import->processed_rows = 0;
+        $import->success_count = 0;
+        $import->error_count = 0;
+        $import->errors = [];
+        $import->save();
+
+        return $import;
+    }
+
 }
