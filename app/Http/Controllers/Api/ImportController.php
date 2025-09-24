@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StoreImportRequest;
+use App\Jobs\ProcessUserImport;
 use App\Models\Import;
 use Illuminate\Http\JsonResponse;
 
@@ -15,7 +16,7 @@ class ImportController
 
         $import = Import::newPendingImport($filePath);
 
-        //TODO: dispatch job
+        dispatch(new ProcessUserImport($import->id));
 
         return response()->json(['import_id' => $import->id]);
     }
