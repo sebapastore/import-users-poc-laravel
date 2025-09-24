@@ -62,7 +62,14 @@ curl -X POST http://localhost:8000/api/imports \
 -F "file=@storage/app/test/users_valid.csv"
 ```
 
-2. Test POST /api/import with a CSV containing some row errors
+2. Test GET /api/import/{id} with the returned import_id from POST /api/import
+```bash
+curl -H "Authorization: Bearer 123456" \
+-H "Accept: application/json" \
+-X GET http://localhost:8000/api/imports/{id}
+```
+
+3. Test POST /api/import with a CSV containing some row errors
 ```bash
 curl -X POST http://localhost:8000/api/imports \
 -H "Authorization: Bearer 123456" \
@@ -70,7 +77,7 @@ curl -X POST http://localhost:8000/api/imports \
 -F "file=@storage/app/test/users_mixed.csv"
 ```
 
-3. Test POST /api/import with a CSV that has extra columns at the end
+4. Test POST /api/import with a CSV that has extra columns at the end
 ```bash
 curl -X POST http://localhost:8000/api/imports \
 -H "Authorization: Bearer 123456" \
@@ -78,19 +85,12 @@ curl -X POST http://localhost:8000/api/imports \
 -F "file=@storage/app/test/users_edge.csv"
 ```
 
-4. Test POST /api/import with a CSV that has wrong headers
+5. Test POST /api/import with a CSV that has wrong headers
 ```bash
 curl -X POST http://localhost:8000/api/imports \
 -H "Authorization: Bearer 123456" \
 -H "Accept: application/json" \
 -F "file=@storage/app/test/users_header_error.csv"
-```
-
-5. Test GET /api/import/{id} with the returned import_id from POST /api/import
-```bash
-curl -H "Authorization: Bearer 123456" \
--H "Accept: application/json" \
--X GET http://localhost:8000/api/imports/{id}
 ```
 
 6. Test GET /api/users/
