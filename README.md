@@ -51,6 +51,9 @@ PHP 8.4, Composer 2, common php extensions.
 
 On another cli tab:
 
+> For easier inspection of JSON output in the terminal, you can pipe your `curl` request to `jq`:
+
+
 1. Test POST /api/import with a valid CSV
 ```bash
 curl -X POST http://localhost:8000/api/imports \
@@ -85,9 +88,9 @@ curl -X POST http://localhost:8000/api/imports \
 
 5. Test GET /api/import/{id} with the returned import_id from POST /api/import
 ```bash
-curl -X GET http://localhost:8000/api/imports/123e4567-e89b-12d3-a456-426614174000 \
--H "Authorization: Bearer 123456" \
--H "Accept: application/json"
+curl -H "Authorization: Bearer 123456" \
+-H "Accept: application/json" \
+-X GET http://localhost:8000/api/imports/{id}
 ```
 
 6. Test GET /api/users/
