@@ -19,16 +19,15 @@ class ImportResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            $this->id,
-            $this->status,
-            $this->total_rows,
-            $this->processed_rows,
-            $this->success_count,
-            $this->error_count,
-            $this->error_count,
-            $this->errors,
-            $this->started_at,
-            $this->finished_at,
+            'id' => $this->id,
+            'status' => $this->status,
+            'total_rows' => $this->total_rows,
+            'processed_rows' => $this->processed_rows,
+            'success_count' =>  $this->success_count,
+            'error_count' => $this->error_count,
+            'errors' => $this->errors,
+            'started_at' => $this->started_at,
+            'finished_at' => $this->finished_at,
         ];
     }
 }
