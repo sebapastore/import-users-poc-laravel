@@ -10,7 +10,7 @@ Small API that accepts a CSV upload of Users, processes it asynchronously via a 
 ## Local Setup
 
 ### Requirements
-PHP 8.4, Composer 2, common php extensions.
+PHP 8.4, Composer 2, and standard  PHP extensions.
 
 ### Installation
 
