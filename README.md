@@ -20,7 +20,7 @@ PHP 8.4, Composer 2, common php extensions.
    composer install
    ```
 
-2. Copy the example environment file. This will set a default `API_TOKEN=123456` that can be updated:
+2. Copy the example environment file. **This will set a default `API_TOKEN=123456` that will be used as a fixed token for the API auth**. You can update the value if you want but you will have to take that into account when using the tests examples:
    ```bash
    cp .env.example .env
    ```
