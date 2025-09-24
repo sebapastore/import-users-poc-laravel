@@ -46,3 +46,65 @@ PHP 8.4, Composer 2, common php extensions.
    ```bash
    php artisan queue:work
    ```
+
+### Test the endpoints (TODO)
+
+On another cli tab:
+
+1. Test POST /api/import with a valid CSV
+```bash
+curl -X POST http://localhost:8000/api/imports \
+-H "Authorization: Bearer 123456" \
+-H "Accept: application/json" \
+-F "file=@storage/app/test/users_valid.csv"
+```
+
+2. Test POST /api/import with a CSV containing some row errors
+```bash
+curl -X POST http://localhost:8000/api/imports \
+-H "Authorization: Bearer 123456" \
+-H "Accept: application/json" \
+-F "file=@storage/app/test/users_mixed.csv"
+```
+
+3. Test POST /api/import with a CSV that has extra columns at the end
+```bash
+curl -X POST http://localhost:8000/api/imports \
+-H "Authorization: Bearer 123456" \
+-H "Accept: application/json" \
+-F "file=@storage/app/test/users_edge.csv"
+```
+
+4. Test POST /api/import with a CSV that has wrong headers
+```bash
+curl -X POST http://localhost:8000/api/imports \
+-H "Authorization: Bearer 123456" \
+-H "Accept: application/json" \
+-F "file=@storage/app/test/users_header_error.csv"
+```
+
+5. Test GET /api/import/{id} with the returned import_id from POST /api/import
+```bash
+curl -X GET http://localhost:8000/api/imports/123e4567-e89b-12d3-a456-426614174000 \
+-H "Authorization: Bearer 123456" \
+-H "Accept: application/json"
+```
+
+6. Test GET /api/users/
+```bash
+curl -X GET http://localhost:8000/api/users \
+-H "Authorization: Bearer 123456" \
+-H "Accept: application/json"
+```
+
+## Considerations
+
+* Authentication uses a fixed token. This is not what I would choose for production, but it keeps things simple for this exercise.
+* Uploaded files are stored locally. Ideally, they should go to a Storage bucket.
+* CSV headers must be in a specific order for simplicity.
+* The current implementation has memory limitations. For large datasets (hundreds of thousands or millions of rows), I would implement a batch system with jobs that process chunks of rows (100–1000 each), passing only a specific file pointer and row count to each job.
+* Ideally, I would set up Git hooks and a CI pipeline with GitHub Workflows to run tests, static analysis at a reasonable level, and code formatting.
+* Default values are set in the business logic rather than at the database level. I find this often makes the code clearer.
+* I chose to use `{"row": null, "message": "some error message"}` for generic errors not tied to a specific row.
+* In a real-world application, salaries might be stored as integers with proper conversion, possibly using a Value Object.
+* Testing: I included some tests for specific classes to demonstrate different approaches. The coverage is not sufficient for a real project, but it shows intent.
